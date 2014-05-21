@@ -32,18 +32,23 @@
     <script src="jsJava.js"></script>
     <script language="Javascript" type="text/javascript" src="http://www.cdolivet.com/editarea/editarea/edit_area/edit_area_full.js"></script>
 	<script language="Javascript" type="text/javascript">
-
-        editAreaLoader.init({
-			id: "program"	// id of the textarea to transform		
-			,start_highlight: true	// if start with highlight
-			,allow_resize: "both"
-			,allow_toggle: true
-			,word_wrap: true
-			,language: "en"
-			,syntax: "java"	
-		});
+    
+        if(editAreaLoader){
+            editAreaLoader.init({
+                id: "program"	// id of the textarea to transform		
+                ,start_highlight: true	// if start with highlight
+                ,allow_resize: "both"
+                ,allow_toggle: true
+                ,word_wrap: true
+                ,language: "en"
+                ,syntax: "java"	
+            });
+        } else {
+            var editAreaLoader = { getValue:function(val){return document.getElementById(val).value;}}
+        }
 
     </script>
+
 </head>
 
 <body>
@@ -51,6 +56,7 @@
         <textarea rows=30 cols=80 id="program" name="prog"></textarea><br/>
         <input type="Button" value="Run" onclick="js_run(editAreaLoader.getValue('program'))"/>
     </form>
+    <div style="float:left; width:50em;" id="js_sys_output"></div>
     <p id="js_output">
     </p>
 </body>
