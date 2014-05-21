@@ -15,17 +15,27 @@ var js_java_out_nl_re = new RegExp(js_java_out_nl,"g");
 var js_java_out_cont_re = new RegExp(js_java_out_cont,"");
 var js_java_input_re = new RegExp(js_java_input,"g");
 
+var js_java_output_div_id = "js_sys_output";
+
+function print(arg){
+    out_div = document.getElementById(js_java_output_div_id);
+    if(out_div)
+        out_div.innerHTML+=arg;
+    else
+        alert(arg);
+}
+
 var System = {
     out : {
-        println:function(arg){ alert(arg); },
-        print:function(arg){alert(arg); }
+        println:function(arg){ print(arg+"<br/>"); },
+        print:function(arg){print(arg); }
     },
     in:"Dummy"
 }
 
 function Scanner(input){
     this.next=function(){return prompt("Enter your answer");};
-    this.nextLine = this.next;
+    this.nextLine = function(){return prompt("Enter your answer");};
     this.nextInt = function(){return parseInt(prompt("Enter your answer"));};
     this.nextDouble = function(){return parseFloat(prompt("Enter your answer"));};
     
